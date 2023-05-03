@@ -12,12 +12,19 @@ export class LoginPageComponent implements OnInit {
 
   placeholderData="User ID"
 
+  uname:any
+  psw:any
+
   ngOnInit(): void {
 
   }
 
-  login(){
+  login(a:any,b:any){
     alert("login clicked")
+    this.uname=a.value
+    this.psw=b.value
+    console.log(this.uname,this.psw);
+    
   }
 
   unameChange(event:any){
