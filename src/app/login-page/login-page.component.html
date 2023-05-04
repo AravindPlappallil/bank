@@ -4,20 +4,20 @@
 </div>
 
 <!-- login form -->
-<h2>{{data}}</h2>
+
 <form id="form" action="" style="margin-top: 15%;">
     <div class="container mt-3 text-center p-3" style="width: 35%; background-color: rgba(67, 52, 52, 0.579); border-radius: 5px;">
         <h2>Log In</h2>
         <div class="form-floating mb-3">
-            <input #uname type="email" (change)="unameChange($event)" class="form-control" id="floatingInput" placeholder="User ID">
+            <input [(ngModel)]="uname" type="email"  class="form-control" id="u1" name="uname" placeholder="User ID">
             <label for="floatingInput">User ID</label>
           </div>
           <div class="form-floating">
-            <input #psw type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input [(ngModel)]="psw" type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
             <label for="floatingPassword">Password</label>
           </div>
 
-          <button (click)="login(uname,psw)" type="button" class=" btn btn-primary form-control w-50 mt-2">Log In</button>
+          <button (click)="login()" type="button" class=" btn btn-primary form-control w-50 mt-2">Log In</button>
 
           <p class="text-light">create account <a href="" style="text-decoration: none;" class="text-light">click here</a></p>
 

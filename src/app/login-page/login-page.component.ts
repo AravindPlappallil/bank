@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../service/data.service';
 
 @Component({
   selector: 'app-login-page',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-  constructor() {}
+  constructor(private ds:DataService) {}
 
   data="your perfect banking partner"
 
@@ -14,23 +15,21 @@ export class LoginPageComponent implements OnInit {
 
   uname:any
   psw:any
+  
 
   ngOnInit(): void {
 
   }
 
-  login(a:any,b:any){
-    alert("login clicked")
-    this.uname=a.value
-    this.psw=b.value
+  login(){
     console.log(this.uname,this.psw);
+    
+    // alert(this.ds.sdata)
+    alert(this.ds.checkData())
     
   }
 
-  unameChange(event:any){
-    console.log(event.target.value);
-    
-  }
+
 }
 
 
