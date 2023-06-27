@@ -1,0 +1,130 @@
+<div class="row">
+    <div class="container col-lg-5 col-md-12 col-sm-12">
+        <h1 class="text-center">Welcome {{userName}}</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, temporibus cum repellat necessitatibus
+            nihil dolores iste vero at, magni voluptas tenetur expedita facere. Ab laborum temporibus nihil minima
+            consequuntur eveniet?</p>
+        <button>read more</button>
+    </div>
+
+    <div  class=" container col-lg-5 col-md-12 col-sm-12">
+        <!-- button for balance -->
+        <button [ngClass]="Dacno?'cc':'' " class="btn btn-primary w-75" type="button" (click)="getBalance()" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">Balance Enquiry</button>
+        <!-- button for view account details -->
+        <button [ngClass]="Dacno?'cc':'' " class="btn btn-primary w-75 mt-3" (click)="getDetails()" data-bs-toggle="modal"
+            data-bs-target="#exampleModal" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">View
+            account details</button>
+        <!-- Send Money -->
+        <button [ngClass]="Dacno?'cc':'' " class="btn btn-primary w-75 mt-3" type="button" data-bs-toggle="modal"
+            data-bs-target="#exampleModal1">Send Money</button>
+        <!-- account statement -->
+        <a href="/transaction"><button [ngClass]="Dacno?'cc':'' " class="btn btn-primary w-75 mt-3"  type="button">Account Statement</button></a>
+        <!-- delete account -->
+        <button [ngClass]="Dacno?'cc':'' " class="btn btn-primary w-75 mt-3" (click)="deleteClick()" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" >Delete Account</button>
+
+    </div>
+
+  
+</div>
+
+
+<!-- logout bottun -->
+<div class="fixed-bottom text-center md-5 pd-5 ">
+    <button (click)="logout()" class="btn btn-primary md-5">logout</button>
+</div>
+
+<!-- balance enquiry -->
+<div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasExample"
+    aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h3 class="offcanvas-title" id="offcanvasExampleLabel"><strong>Balance</strong></h3>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            <p>User Name: {{userName}}</p>
+            <p>Account No:{{acno}}</p>
+            <p>Your current balance is {{balance}}</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- View accnount details -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    <!-- <img src="../../assets/png-transparent-computer-icons-user-profile-social-web-others-blue-social-media-desktop-wallpaper-thumbnail.png" alt=""> -->
+                    {{detailsName}}
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5>Account Details</h5>
+                <p>Account Number:<strong>{{detailsAcno}}</strong></p>
+                <p>User Name:<strong>{{detailsName}}</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Send Money -->
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Money Transfer</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="fundTransferss()" [formGroup]="moneyTransferForm" action="" class="text-center">
+                        <input formControlName="toAcno" type="text" class="form-control mt-2" id="f1" name="toacno"
+                            placeholder="To Account Number">
+                        <div
+                            *ngIf="(this.moneyTransferForm.get('toAcno')?.errors)&&(this.moneyTransferForm.get('toAcno')?.touched)">
+                            <p class="text-dark">must contain numbers only</p>
+                        </div>
+                        <input formControlName="amount" type="text" class="form-control mt-2" id="f2" name="amt"
+                            placeholder="Amount">
+                        <div
+                            *ngIf="(this.moneyTransferForm.get('amount')?.errors)&&(this.moneyTransferForm.get('amount')?.touched)">
+                            <p class="text-dark">must contain numbers only</p>
+                        </div>
+                        <input formControlName="psw" type="password" class="form-control mt-2" id="f3" name="pwd1"
+                            placeholder="Password">
+                        <div
+                            *ngIf="(this.moneyTransferForm.get('psw')?.errors)&&(this.moneyTransferForm.get('psw')?.touched)">
+                            <p class="text-dark">password must charecters or numbers</p>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Transfer</button>
+                    </form>
+    
+                </div>
+                <div class="modal-footer">
+                    <p [ngClass]="tStatus?'s1':'s2'" >{{transactionStatus}}</p>
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- delete button -->
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasBottomLabel">Delete Account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body small">
+            <app-delete (onDelete)="yesDelete($event)" (onCanacle)="noDelete()" [childAcno]="Dacno" > </app-delete>  
+        </div>
+      </div>
+

@@ -3,3 +3,6 @@ body{
     background-image: url(./assets/2312001.jpeg);
     background-size: cover;
 }
+.cc{
+    display: none;
+}

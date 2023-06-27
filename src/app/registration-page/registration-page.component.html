@@ -1,1 +1,40 @@
-<p>registration-page works!</p>
+<div class="container mt-3 text-center p-3"
+    style="width: 35%; background-color: rgba(67, 52, 52, 0.579); border-radius: 5px;">
+    <h2 style="color: aqua;">Register Page</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="register()" action="">
+        <div class="form-floating mb-3 mt-5">
+            <input type="email" formControlName="acno" class="form-control" id="accno" name="uname" placeholder="User ID">
+            <label for="floatingInput">Account No</label>
+        </div>
+        <div *ngIf="(this.registerForm.get('acno')?.errors)&&(this.registerForm.get('acno')?.touched)">
+            <p class="text-white">must contain numbers only</p>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="email" formControlName="uname" class="form-control" id="usn" name="uname" placeholder="User ID">
+            <label for="floatingInput">User Name</label>
+        </div>
+        <div *ngIf="(this.registerForm.get('uname')?.errors)&&(this.registerForm.get('uname')?.touched)">
+            <p class="text-white">must contain charecters only</p>
+        </div>
+        <div class="form-floating">
+            <input type="password" formControlName="psw" class="form-control" id="cPassword" name="password"
+                placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+        <div *ngIf="(this.registerForm.get('psw')?.errors)&&(this.registerForm.get('psw')?.touched)">
+            <p class="text-white">password must charecters or numbers</p>
+        </div>
+        <div class="form-floating mt-3">
+            <input type="password" formControlName="cpsw" class="form-control" id="cPassword" name="password"
+                placeholder="confirm Password">
+            <label for="floatingPassword">confirm Password</label>
+        </div>
+        <div *ngIf="pswCheck">
+            <p class="text-white">password doesnt match</p>
+        </div>
+
+        <button type="submit" class=" btn btn-primary form-control w-50 mt-2">Create account</button>
+
+    </form>
+
+</div>

@@ -1,0 +1,40 @@
+
+<div> 
+    <h1 class="text-center text-dark">Account Statement</h1>
+    <h3 class="text-center">Account Number: {{acno}}</h3>
+    <h3 class="text-center">Account Holder Name: {{user}}</h3>
+    <h4 class="text-center">{{date| date:'medium'}}</h4>
+
+
+</div>
+<div class="text-center">
+  <h4>Filter</h4>
+  <button (click)="filterTrans('')" class="btn btn-secondary m-2">All</button>
+  <button (click)="filterTrans('CREDIT')" class="btn btn-secondary m-2">Credit</button>
+  <button (click)="filterTrans('DEBIT')" class="btn btn-secondary m-2">Debit</button>
+</div>
+<table class="table w-75 container">
+    <thead>
+      <tr>
+        <th scope="col">Index</th>
+        <th scope="col">Type</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of transaction | filter:searchString:'type'; let n=index" class="text-white">
+        <td>{{n+1}}</td>
+        <td>{{i.type}}</td>
+        <td>{{i.amount}}</td>
+        <td>{{i.date}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center">
+    <button (click)="exportPdf()" class="btn btn-primary w-25 mt-3 mt-3" >Print</button> <br>
+    <a href="/home-page">
+        <button class="btn btn-primary w-25 mt-3" type="button">Go Back</button>
+    </a>
+  </div>

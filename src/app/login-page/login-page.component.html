@@ -5,21 +5,28 @@
 
 <!-- login form -->
 
-<form id="form" action="" style="margin-top: 15%;">
-    <div class="container mt-3 text-center p-3" style="width: 35%; background-color: rgba(67, 52, 52, 0.579); border-radius: 5px;">
-        <h2>Log In</h2>
-        <div class="form-floating mb-3">
-            <input [(ngModel)]="uname" type="email"  class="form-control" id="u1" name="uname" placeholder="User ID">
-            <label for="floatingInput">User ID</label>
-          </div>
-          <div class="form-floating">
-            <input [(ngModel)]="psw" type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-          </div>
-
-          <button (click)="login()" type="button" class=" btn btn-primary form-control w-50 mt-2">Log In</button>
-
-          <p class="text-light">create account <a href="" style="text-decoration: none;" class="text-light">click here</a></p>
-
+<form [formGroup]="loginForm" id="form" action="" style="margin-top: 15%;">
+  <div class="container mt-3 text-center p-3"
+    style="width: 35%; background-color: rgba(67, 52, 52, 0.579); border-radius: 5px;">
+    <h2>Log In</h2>
+    <div class="form-floating mb-3">
+      <input formControlName="acno" type="email" class="form-control" id="u1" name="uname" placeholder="User ID">
+      <label for="floatingInput">Account no</label>
     </div>
+    <div *ngIf="(this.loginForm.get('acno')?.errors)&&(this.loginForm.get('acno')?.touched)">
+      <p class="text-white">must contain numbers only</p>
+    </div>
+    <div class="form-floating">
+      <input type="password" formControlName="psw" class="form-control" id="floatingPassword" name="password"
+        placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <button (click)="login()" type="submit" class=" btn btn-primary form-control w-50 mt-2">Log In</button>
+
+    <p class="text-light">create account <a routerLink="registration-page" style="text-decoration: none;"
+        class="text-light">click here</a></p>
+
+  </div>
 </form>
+
